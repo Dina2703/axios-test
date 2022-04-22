@@ -1,5 +1,6 @@
 import Get from "./comp/Get";
 import Post from "./comp/Post";
+import Put from "./comp/Put";
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <h2>Axios examples:</h2>
       <Get />
       <Post />
+      <Put />
     </div>
   );
 }
