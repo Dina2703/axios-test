@@ -1,13 +1,11 @@
-import axios from "axios";
+import { client } from "./client";
 import { useState, useEffect } from "react";
-
-const baseURL = "https://jsonplaceholder.typicode.com/posts";
 
 function Post() {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    axios.get(baseURL).then((res) => {
+    client.get("/").then((res) => {
       setPost(res.data);
     });
   }, []);
@@ -15,8 +13,8 @@ function Post() {
     return "No post!";
   }
   function createPost() {
-    axios
-      .post(baseURL, {
+    client
+      .post("/", {
         title: "post by Dina",
         body: "Hello World",
       })

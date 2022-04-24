@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-
-const baseUrl = "https://jsonplaceholder.typicode.com/posts";
+import { client } from "./client";
 
 function Delete({ isDeleted, setIsDeleted }) {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    axios.get(`${baseUrl}/1`).then((res) => setPost(res.data));
+    client.get("/1").then((res) => setPost(res.data));
   }, []);
 
   const deletePost = () => {
-    axios.delete(`${baseUrl}/1`);
+    client.delete("/1");
     setIsDeleted(true);
     setPost(null);
   };

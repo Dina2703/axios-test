@@ -1,7 +1,5 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-
-const baseURL = "https://jsonplaceholder.typicode.com/posts";
+import { client } from "./client";
 
 function Get() {
   const [post, setPost] = useState(null);
@@ -9,8 +7,8 @@ function Get() {
 
   useEffect(() => {
     //invalid url will trigger an 404 error
-    axios
-      .get(`${baseURL}/ops`)
+    client
+      .get(`/ops`)
       .then((res) => {
         setPost(res.data);
       })

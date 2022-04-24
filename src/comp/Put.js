@@ -1,20 +1,18 @@
-import axios from "axios";
+import { client } from "./client";
 import { useEffect, useState } from "react";
-
-const baseURL = "https://jsonplaceholder.typicode.com/posts";
 
 function Put() {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    axios.get(`${baseURL}/1`).then((res) => {
+    client.get("/1").then((res) => {
       setPost(res.data);
     });
   }, []);
 
   function updatePost() {
-    axios
-      .put(`${baseURL}/1`, {
+    client
+      .put("/1", {
         title: "post by Dina",
         body: "Updated post",
       })
