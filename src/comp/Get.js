@@ -5,12 +5,21 @@ const baseURL = "https://jsonplaceholder.typicode.com/posts";
 
 function Get() {
   const [post, setPost] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get(`${baseURL}/1`).then((res) => {
-      setPost(res.data);
-    });
+    //invalid url will trigger an 404 error
+    axios
+      .get(`${baseURL}/ops`)
+      .then((res) => {
+        setPost(res.data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
   }, []);
+
+  if (error) return `Error: ${error.message}`;
   if (!post) {
     return "No post!";
   }
