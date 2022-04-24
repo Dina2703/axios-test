@@ -4,12 +4,22 @@ import { client } from "./client";
 function Delete({ isDeleted, setIsDeleted }) {
   const [post, setPost] = useState(null);
 
+  //Then-Catch
+  // useEffect(() => {
+  //   client.get("/1").then((res) => setPost(res.data));
+  // }, []);
+
+  //Async-Await
   useEffect(() => {
-    client.get("/1").then((res) => setPost(res.data));
+    async function getPost() {
+      const response = await client.get("/1");
+      setPost(response.data);
+    }
+    getPost();
   }, []);
 
-  const deletePost = () => {
-    client.delete("/1");
+  const deletePost = async () => {
+    await client.delete("/1");
     setIsDeleted(true);
     setPost(null);
   };
