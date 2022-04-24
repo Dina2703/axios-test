@@ -3,7 +3,7 @@ import axios from "axios";
 
 const baseUrl = "https://jsonplaceholder.typicode.com/posts";
 
-function Delete() {
+function Delete({ isDeleted, setIsDeleted }) {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
@@ -11,9 +11,8 @@ function Delete() {
   }, []);
 
   const deletePost = () => {
-    axios.delete(`${baseUrl}/1`).then(() => {
-      alert("Post deleted!");
-    });
+    axios.delete(`${baseUrl}/1`);
+    setIsDeleted(true);
     setPost(null);
   };
 
@@ -21,10 +20,9 @@ function Delete() {
 
   return (
     <div>
-      <h1>Delete post via Axios</h1>
-      <span>Click to delete the post</span>
-
-      <button onClick={deletePost}>delete</button>
+      <button onClick={deletePost} isDeleted>
+        delete
+      </button>
       <div>Post title:</div>
       <h5> {post.title}</h5>
       <div>Post body:</div>
